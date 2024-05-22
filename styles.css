@@ -1,0 +1,36 @@
+body {
+    background-color: #2E2E2E;
+    color: #3773F0;
+}
+
+.title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #e5eaf5;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e5eaf5;
+    text-align: center;
+}
+
+.subtitle2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e5eaf5;
+    text-align: center;
+}
+.subtitle3 {
+    font-size: 16px;
+    color: #e5eaf5;
+    text-align: center;
+}
+
+.stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4, .stMarkdown h5, .stMarkdown h6 {
+    color: #e5eaf5;
+}
+
+
