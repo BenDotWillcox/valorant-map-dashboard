@@ -3,13 +3,13 @@ def encode_image(image_url):
     return image_url
 
 map_images = {
-    'Ascent': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/ascent_image.png'),
-    'Bind': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/bind_image.png'),
-    'Breeze': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/breeze_image.png'),
-    'Icebox': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/icebox_image.png'),
-    'Lotus': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/lotus_image.png'),
-    'Split': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/split_image.png'),
-    'Sunset': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/sunset_image.png'),
+    'Ascent': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/ascent_image.PNG'),
+    'Bind': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/bind_image.PNG'),
+    'Breeze': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/breeze_image.PNG'),
+    'Icebox': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/icebox_image.PNG'),
+    'Lotus': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/lotus_image.PNG'),
+    'Split': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/split_image.PNG'),
+    'Sunset': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/sunset_image.PNG'),
 }
 
 team_logos = {
