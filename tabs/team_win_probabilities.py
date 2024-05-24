@@ -6,7 +6,7 @@ from config import team_full_names, team_colors, team_logos, map_images
 
 
 
-# Function to fetch the latest Elo ratings from the database
+@st.cache_data(ttl=6000)
 def fetch_display_elos():
     conn = get_db_connection()
     query = 'SELECT * FROM latest_elo_ratings'

@@ -7,7 +7,7 @@ from config import team_full_names, regions_teams, team_colors, team_shapes
 
 
 
-# Function to fetch the Elo rating history from the database
+@st.cache_data(ttl=6000)
 def fetch_elo_history():
     conn = get_db_connection()
     query = 'SELECT * FROM elo_rating_history'

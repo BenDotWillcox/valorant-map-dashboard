@@ -1,6 +1,5 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-from tabs import current_map_rankings, map_elo_history, team_win_probabilities
 
 # Set up the Streamlit app configuration
 st.set_page_config(page_title="Valorant League Data Visualization App", layout="wide")
