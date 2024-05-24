@@ -3,9 +3,6 @@ import pandas as pd
 from db_config import get_db_connection
 from config import team_full_names, team_colors, team_logos, map_images
 
-
-
-
 @st.cache_data(ttl=6000)
 def fetch_display_elos():
     conn = get_db_connection()
@@ -14,12 +11,10 @@ def fetch_display_elos():
     conn.close()
     return df
 
-
 def calculate_win_probability(elo1, elo2):
     prob1 = 1 / (1 + 10 ** ((elo2 - elo1) / 1000))
     prob2 = 1 / (1 + 10 ** ((elo1 - elo2) / 1000))
     return prob1, prob2
-
 
 def calculate_bo3_match_win_probability(map_probs):
     prob_team1 = (
@@ -28,7 +23,6 @@ def calculate_bo3_match_win_probability(map_probs):
             (map_probs[0][1] * map_probs[1][0] * map_probs[2][0])
     )
     return prob_team1, 1 - prob_team1
-
 
 def calculate_bo5_match_win_probability(map_probs):
     prob_team1 = (
@@ -45,7 +39,6 @@ def calculate_bo5_match_win_probability(map_probs):
     )
     return prob_team1, 1 - prob_team1
 
-
 def show():
     st.markdown("<h1 class='title'>Team Win Probabilities</h1>", unsafe_allow_html=True)
     st.markdown("<h2 class='subtitle'>Select two teams to view their win probabilities on each map. Based on our Elo ratings</h2>",
@@ -54,11 +47,11 @@ def show():
     # Fetch the latest Elo ratings from the database
     elo_df = fetch_display_elos()
 
+
     # Sidebar for team selection
     with st.sidebar:
         team1 = st.selectbox('Select Team 1', list(team_full_names.values()), key='team1')
         team2 = st.selectbox('Select Team 2', list(team_full_names.values()), key='team2')
-
 
     # Map full team names back to abbreviations
     team_abbr = {v: k for k, v in team_full_names.items()}
@@ -69,13 +62,11 @@ def show():
     team1_elos = elo_df[elo_df['team'] == team1_abbr]
     team2_elos = elo_df[elo_df['team'] == team2_abbr]
 
+
     # Ensure we have the same maps in both DataFrames
     maps = set(team1_elos['map']).intersection(set(team2_elos['map']))
 
     # Create a DataFrame to store the probabilities
-    prob_df = pd.DataFrame(columns=['Map', 'Team', 'Win Probability'])
-
-    # Calculate win probabilities for each map
     prob_list = []
     for map_name in maps:
         team1_elo = team1_elos[team1_elos['map'] == map_name]['elo_rating'].values[0]
@@ -90,8 +81,12 @@ def show():
     prob_df = pd.DataFrame(prob_list)
 
     # Add the full team name and logo HTML to the DataFrame
-    prob_df['Team'] = prob_df['Team'].apply(
-        lambda abbr: f'<img src="{team_logos[abbr]}" style="width: 60px; height: 60px;"> {team_full_names[abbr]}')
+    try:
+        prob_df['Team'] = prob_df['Team'].apply(
+            lambda abbr: f'<img src="{team_logos[abbr]}" style="width: 60px; height: 60px;"> {team_full_names[abbr]}')
+    except KeyError as e:
+        st.error(f"KeyError: {e} - The 'Team' column is missing in prob_df.")
+
     prob_df['Map'] = prob_df['Map'].apply(lambda map_name: f'<img src="{map_images[map_name]}" style="width: 100%;">')
 
     # Display the team logos above the table
@@ -102,7 +97,6 @@ def show():
             {team1_logo_html} <span style="font-size: 30px; font-weight: bold;">vs</span> {team2_logo_html}
         </div>
     """, unsafe_allow_html=True)
-
 
     # Custom CSS for styling the table
     st.markdown(f"""
@@ -345,10 +339,12 @@ def show():
         st.markdown(f"""<h2 class='subtitle'>Match win probabilities for {team1} vs {team2}:</h2>""", unsafe_allow_html=True)
         st.markdown(f"""<h4 class='subtitle2'>{team1}: {win_prob_team1:.2%}</h4>""",
                     unsafe_allow_html=True)
-        st.markdown(f"""<h4 class='subtitle2'>{team2}: {win_prob_team2:.2%}</h4>""",
+        st.markdown(f"""<h4 class='subtitle2'>{team2}: {win_prob_team2:.2%}""",
                     unsafe_allow_html=True)
         # Display the match probabilities table using st.table
         st.table(match_prob_df)
+
+
 
 
 
