@@ -4,9 +4,6 @@ from db_config import get_db_connection
 import altair as alt
 from config import team_full_names, regions_teams, team_colors, team_shapes
 
-
-
-
 @st.cache_data(ttl=6000)
 def fetch_elo_history():
     conn = get_db_connection()
@@ -15,11 +12,9 @@ def fetch_elo_history():
     conn.close()
     return df
 
-
 def show():
     st.markdown("<h1 class='title'>Valorant League Map Elo History</h1>", unsafe_allow_html=True)
-    st.markdown("<h2 class='subtitle'>Visualize the Elo rating history of teams over time.</h2>",
-                unsafe_allow_html=True)
+    st.markdown("<h2 class='subtitle'>Visualize the Elo rating history of teams over time.</h2>", unsafe_allow_html=True)
 
     # Sidebar for parameter selection
     with st.sidebar:
@@ -27,8 +22,7 @@ def show():
 
         if view_type == "By Map":
             region = st.selectbox('Select a region', list(regions_teams.keys()))
-            map_name = st.selectbox('Select a map', ['Ascent', 'Bind', 'Breeze', 'Icebox', 'Lotus', 'Split',
-                                                     'Sunset'])  # Add your map options here
+            map_name = st.selectbox('Select a map', ['Ascent', 'Bind', 'Breeze', 'Icebox', 'Lotus', 'Split', 'Sunset'])  # Add your map options here
             teams_in_region = regions_teams[region]
             selected_teams = st.multiselect('Select teams', teams_in_region, default=teams_in_region)
         else:  # By Team
@@ -129,3 +123,15 @@ def show():
                                                                               titleColor='#000000').configure_axisY(
             labelColor='#000000', titleColor='#000000'), use_container_width=True)
 
+    # Optional: Include an ad unit at the bottom of the tab
+    ad_unit = """
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3880815739692815"
+         data-ad-slot="5945901485"
+         data-ad-format="auto"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    """
+    st.components.v1.html(ad_unit, height=100)

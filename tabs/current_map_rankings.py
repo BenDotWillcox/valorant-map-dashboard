@@ -3,8 +3,6 @@ import pandas as pd
 from db_config import get_db_connection
 from config import team_full_names, map_images
 
-
-
 @st.cache_data(ttl=6000)  # Cache the results for 10 minutes
 def fetch_display_elos():
     conn = get_db_connection()
@@ -15,8 +13,7 @@ def fetch_display_elos():
 
 def show():
     st.markdown("<h1 class='title'>Valorant League Current Map Rankings</h1>", unsafe_allow_html=True)
-    st.markdown("<h2 class='subtitle'>Ranking of teams by their latest Elo rating on each map.</h2>",
-                unsafe_allow_html=True)
+    st.markdown("<h2 class='subtitle'>Ranking of teams by their latest Elo rating on each map.</h2>", unsafe_allow_html=True)
 
     # Fetch the latest Elo ratings from the database
     elo_df = fetch_display_elos()
@@ -47,4 +44,18 @@ def show():
             with row2[idx - 4]:
                 st.image(map_images[map_name], use_column_width=True)  # Display map image as title
                 st.dataframe(map_df[['Team', 'Elo Rating']], use_container_width=True)
+
+    # Optional: Include an ad unit at the bottom of the tab
+    ad_unit = """
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3880815739692815"
+         data-ad-slot="5945901485"
+         data-ad-format="auto"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    """
+    st.components.v1.html(ad_unit, height=100)
+
 

@@ -2,8 +2,16 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 from tabs import current_map_rankings, map_elo_history, team_win_probabilities
 
+
 # Set up the Streamlit app configuration
 st.set_page_config(page_title="Valorant League Data Visualization App", layout="wide")
+# Inject Google AdSense script
+adsense_script = """
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3880815739692815"
+     crossorigin="anonymous"></script>
+"""
+st.components.v1.html(adsense_script)
+
 
 def load_css(file_path):
     with open(file_path) as f:
@@ -29,6 +37,20 @@ elif selected == "Map Elo History":
     map_elo_history.show()
 elif selected == "Team Win Probabilities":
     team_win_probabilities.show()
+
+# Optionally include an ad unit at the bottom of the page
+ad_unit = """
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3880815739692815"
+     data-ad-slot="5945901485"
+     data-ad-format="auto"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+"""
+st.components.v1.html(ad_unit, height=100)
+
 
 
 

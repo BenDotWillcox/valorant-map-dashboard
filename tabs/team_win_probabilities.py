@@ -41,12 +41,10 @@ def calculate_bo5_match_win_probability(map_probs):
 
 def show():
     st.markdown("<h1 class='title'>Team Win Probabilities</h1>", unsafe_allow_html=True)
-    st.markdown("<h2 class='subtitle'>Select two teams to view their win probabilities on each map. Based on our Elo ratings</h2>",
-                unsafe_allow_html=True)
+    st.markdown("<h2 class='subtitle'>Select two teams to view their win probabilities on each map. Based on our Elo ratings</h2>", unsafe_allow_html=True)
 
     # Fetch the latest Elo ratings from the database
     elo_df = fetch_display_elos()
-
 
     # Sidebar for team selection
     with st.sidebar:
@@ -61,7 +59,6 @@ def show():
     # Filter Elo ratings for the selected teams
     team1_elos = elo_df[elo_df['team'] == team1_abbr]
     team2_elos = elo_df[elo_df['team'] == team2_abbr]
-
 
     # Ensure we have the same maps in both DataFrames
     maps = set(team1_elos['map']).intersection(set(team2_elos['map']))
@@ -138,8 +135,7 @@ def show():
     html_table = prob_df.to_html(index=False, escape=False, classes='custom-table')
     html_table = html_table.replace('<td>', '<td class="map-column">')  # Add the map-column class to the map cells
     html_table = html_table.replace('<th>Team</th>', '<th class="team-column">Team</th>')  # Center the Team header
-    html_table = html_table.replace('<th>Win Probability</th>',
-                                    '<th class="win-probability-column">Win Probability</th>')  # Center the Win Probability header
+    html_table = html_table.replace('<th>Win Probability</th>', '<th class="win-probability-column">Win Probability</th>')  # Center the Win Probability header
 
     st.markdown(html_table, unsafe_allow_html=True)
 
@@ -213,11 +209,8 @@ def show():
                                              f"and the final map is {pick3}."
 
                     # Display the optimal selection description
-                    st.markdown("<h4 class='subtitle3'>Map pool with optimal selections (If both teams picked optimally to their win percentages on each map):",
-                                unsafe_allow_html=True)
-                    st.markdown(
-                        f"""<h4 class='subtitle3'>{optimal_selection_desc}""",
-                        unsafe_allow_html=True)
+                    st.markdown("<h4 class='subtitle3'>Map pool with optimal selections (If both teams picked optimally to their win percentages on each map):", unsafe_allow_html=True)
+                    st.markdown(f"""<h4 class='subtitle3'>{optimal_selection_desc}""", unsafe_allow_html=True)
 
             elif bo_type == 'BO5':
                 if len(map_probs) < 5:
@@ -260,11 +253,8 @@ def show():
                                              f"and the final map is {pick5}."
 
                     # Display the optimal selection description
-                    st.markdown("<h4 class='subtitle3'>Map pool with optimal selections (If both teams picked optimally to their win percentages on each map):",
-                                unsafe_allow_html=True)
-                    st.markdown(
-                        f"""<h4 class='subtitle3'>{optimal_selection_desc}""",
-                        unsafe_allow_html=True)
+                    st.markdown("<h4 class='subtitle3'>Map pool with optimal selections (If both teams picked optimally to their win percentages on each map):", unsafe_allow_html=True)
+                    st.markdown(f"""<h4 class='subtitle3'>{optimal_selection_desc}""", unsafe_allow_html=True)
 
         # Calculate win probabilities for each selected map
         map_probs = []
@@ -278,8 +268,7 @@ def show():
         rows = []
         for i, map_name in enumerate(selected_maps):
             prob1, prob2 = map_probs[i]
-            rows.append(
-                {'Map': map_name, f'{team1} Win Probability': f'{prob1:.2%}', f'{team2} Win Probability': f'{prob2:.2%}'})
+            rows.append({'Map': map_name, f'{team1} Win Probability': f'{prob1:.2%}', f'{team2} Win Probability': f'{prob2:.2%}'})
 
         match_prob_df = pd.DataFrame(rows)
         match_prob_df = match_prob_df.reset_index(drop=True)
@@ -293,10 +282,8 @@ def show():
             win_prob_team1, win_prob_team2 = calculate_bo5_match_win_probability(map_probs)
 
         st.markdown(f"""<h2 class='subtitle'>Match win probabilities for {team1} vs {team2}:</h2>""", unsafe_allow_html=True)
-        st.markdown(f"""<h4 class='subtitle2'>{team1}: {win_prob_team1:.2%}</h4>""",
-                    unsafe_allow_html=True)
-        st.markdown(f"""<h4 class='subtitle2'>{team2}: {win_prob_team2:.2%}</h4>""",
-                    unsafe_allow_html=True)
+        st.markdown(f"""<h4 class='subtitle2'>{team1}: {win_prob_team1:.2%}</h4>""", unsafe_allow_html=True)
+        st.markdown(f"""<h4 class='subtitle2'>{team2}: {win_prob_team2:.2%}</h4>""", unsafe_allow_html=True)
 
         # Display the match probabilities table using st.table
         st.table(match_prob_df)
@@ -322,8 +309,7 @@ def show():
         rows = []
         for i, map_name in enumerate(selected_maps):
             prob1, prob2 = map_probs[i]
-            rows.append(
-                {'Map': map_name, f'{team1} Win Probability': f'{prob1:.2%}', f'{team2} Win Probability': f'{prob2:.2%}'})
+            rows.append({'Map': map_name, f'{team1} Win Probability': f'{prob1:.2%}', f'{team2} Win Probability': f'{prob2:.2%}'})
 
         match_prob_df = pd.DataFrame(rows)
         match_prob_df = match_prob_df.reset_index(drop=True)
@@ -337,12 +323,25 @@ def show():
             win_prob_team1, win_prob_team2 = calculate_bo5_match_win_probability(map_probs)
 
         st.markdown(f"""<h2 class='subtitle'>Match win probabilities for {team1} vs {team2}:</h2>""", unsafe_allow_html=True)
-        st.markdown(f"""<h4 class='subtitle2'>{team1}: {win_prob_team1:.2%}</h4>""",
-                    unsafe_allow_html=True)
-        st.markdown(f"""<h4 class='subtitle2'>{team2}: {win_prob_team2:.2%}""",
-                    unsafe_allow_html=True)
+        st.markdown(f"""<h4 class='subtitle2'>{team1}: {win_prob_team1:.2%}</h4>""", unsafe_allow_html=True)
+        st.markdown(f"""<h4 class='subtitle2'>{team2}: {win_prob_team2:.2%}""", unsafe_allow_html=True)
+
         # Display the match probabilities table using st.table
         st.table(match_prob_df)
+
+    # Optional: Include an ad unit at the bottom of the tab
+    ad_unit = """
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3880815739692815"
+         data-ad-slot="5945901485"
+         data-ad-format="auto"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    """
+    st.components.v1.html(ad_unit, height=100)
+
 
 
 
