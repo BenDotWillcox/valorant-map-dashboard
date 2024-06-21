@@ -22,12 +22,12 @@ def show():
 
         if view_type == "By Map":
             region = st.selectbox('Select a region', list(regions_teams.keys()))
-            map_name = st.selectbox('Select a map', ['Ascent', 'Bind', 'Breeze', 'Icebox', 'Lotus', 'Split', 'Sunset'])  # Add your map options here
+            map_name = st.selectbox('Select a map', ['Abyss', 'Ascent', 'Bind', 'Breeze', 'Haven', 'Icebox', 'Lotus', 'Split', 'Sunset'])  # Add your map options here
             teams_in_region = regions_teams[region]
             selected_teams = st.multiselect('Select teams', teams_in_region, default=teams_in_region)
         else:  # By Team
             team_name = st.selectbox('Select a team', list(team_full_names.values()))
-            maps = ['Ascent', 'Bind', 'Breeze', 'Icebox', 'Lotus', 'Split', 'Sunset']  # Add your map options here
+            maps = ['Abyss', 'Ascent', 'Bind', 'Breeze', 'Haven', 'Icebox', 'Lotus', 'Split', 'Sunset']  # Add your map options here
             selected_maps = st.multiselect('Select maps', maps, default=maps)
 
     # Fetch the Elo rating history from the database
@@ -93,7 +93,7 @@ def show():
 
         # Create a color scale based on the map names
         color_scale = alt.Scale(domain=maps,
-                                range=['#1f77b4', '#ff7f0e', '#2ca02c', '#9467bd', '#e377c2', '#8c564b', '#d62728'])
+                                range=['#000000', '#1f77b4', '#ff7f0e', '#2ca02c', '#8c564b', '#e377c2', '#9467bd', '#7c7d7c', '#d62728'])
 
         # Create a step line chart to visualize the Elo history
         line_chart = alt.Chart(filtered_elo_history).mark_line(strokeWidth=3, interpolate='step-after').encode(
