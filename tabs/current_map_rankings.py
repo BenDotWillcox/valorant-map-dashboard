@@ -19,9 +19,9 @@ def show():
     elo_df = fetch_display_elos()
     maps = elo_df['map'].unique()  # Get the unique map names
 
-    # Create two rows for displaying the tables
-    row1 = st.columns(4)
-    row2 = st.columns(3)
+    # Create a list of columns to store dynamically
+    num_maps_per_row = 4  # Define how many maps to show per row
+    rows = [st.columns(num_maps_per_row) for _ in range((len(maps) + num_maps_per_row - 1) // num_maps_per_row)]
 
     for idx, map_name in enumerate(maps):
         # Filter and sort the Elo ratings for the current map
@@ -35,15 +35,14 @@ def show():
         # Replace team abbreviations with full names
         map_df['Team'] = map_df['Team'].apply(lambda abbr: team_full_names.get(abbr, abbr))
 
+        # Determine the row and column index
+        row_idx = idx // num_maps_per_row
+        col_idx = idx % num_maps_per_row
+
         # Display the image and table in the appropriate row and column
-        if idx < 4:
-            with row1[idx]:
-                st.image(map_images[map_name], use_column_width=True)  # Display map image as title
-                st.dataframe(map_df[['Team', 'Elo Rating']], use_container_width=True)
-        elif idx - 4 < len(row2):  # Ensure idx - 4 is within the range of row2
-            with row2[idx - 4]:
-                st.image(map_images[map_name], use_column_width=True)  # Display map image as title
-                st.dataframe(map_df[['Team', 'Elo Rating']], use_container_width=True)
+        with rows[row_idx][col_idx]:
+            st.image(map_images[map_name], use_column_width=True)  # Display map image as title
+            st.dataframe(map_df[['Team', 'Elo Rating']], use_container_width=True)
 
     # Optional: Include an ad unit at the bottom of the tab
     ad_unit = """
