@@ -3,9 +3,11 @@ def encode_image(image_url):
     return image_url
 
 map_images = {
+    'Abyss': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/abyss_image.PNG'),
     'Ascent': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/ascent_image.PNG'),
     'Bind': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/bind_image.PNG'),
     'Breeze': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/breeze_image.PNG'),
+    'Haven': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/haven_image.PNG'),
     'Icebox': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/icebox_image.PNG'),
     'Lotus': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/lotus_image.PNG'),
     'Split': encode_image('https://raw.githubusercontent.com/BenDotWillcox/valorant-map-images/main/split_image.PNG'),
