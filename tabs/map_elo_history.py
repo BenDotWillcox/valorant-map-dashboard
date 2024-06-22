@@ -123,15 +123,4 @@ def show():
                                                                               titleColor='#000000').configure_axisY(
             labelColor='#000000', titleColor='#000000'), use_container_width=True)
 
-    # Optional: Include an ad unit at the bottom of the tab
-    ad_unit = """
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-3880815739692815"
-         data-ad-slot="5945901485"
-         data-ad-format="auto"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-    """
-    st.components.v1.html(ad_unit, height=100)
+
