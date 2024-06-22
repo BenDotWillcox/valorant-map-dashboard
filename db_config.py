@@ -1,12 +1,14 @@
-import streamlit as st
+from dotenv import load_dotenv
+import os
 from sqlalchemy import create_engine
 
+load_dotenv()
 def get_db_connection():
-    user = st.secrets["DB"]["DB_USER"]
-    password = st.secrets["DB"]["DB_PASSWORD"]
-    host = st.secrets["DB"]["DB_HOST"]
-    port = st.secrets["DB"]["DB_PORT"]
-    database = st.secrets["DB"]["DB_NAME"]
+    user = os.getenv('DB_USER')
+    password = os.getenv('DB_PASSWORD')
+    host = os.getenv('DB_HOST')
+    port = os.getenv('DB_PORT')
+    database = os.getenv('DB_NAME')
 
     connection_string = f'postgresql://{user}:{password}@{host}:{port}/{database}'
     engine = create_engine(connection_string)
